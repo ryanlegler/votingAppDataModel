@@ -1,0 +1,86 @@
+<div ng-controller="candidateDataModelController">
+
+    <div class="column_1">
+            <h1>Candidates</h1>
+        <div candidates-directive fields="fields" candidates="candidates"></div>
+
+
+        <div class="debugging_window candidates">
+            <div class="header">Candidates Data</div>
+            <div class="inner_window">
+
+                <div class="code_line" ng-repeat="candidate in candidates track by $index">
+                    <div>"label": "{{candidate.label}}",</div>
+                    <div>fields [{</div>
+                    <div style="margin-left:30px;" ng-repeat="candidatefield in candidate.fields">
+                        <div>"label": "{{candidatefield.label}}",</div>
+                        <div>"type": "{{candidatefield.type}}"</div>
+                        <div ng-if="candidatefield.value">"value": "{{candidatefield.value}}"</div>
+                        <div>}, {</div>
+                    </div>
+                    <div>}]</div>
+                </div>
+                <div>}]</div>
+
+            </div>
+        </div>
+
+
+        <div ng-click="clearCandidates()">CLEAR</div>
+    </div>
+
+
+    <div class="column_2">
+        <h1>Candidate Data Model</h1>
+        <h2>Candidates Fields</h2>
+
+        <div candidatemodel-directive fields="fields" ></div>
+
+
+        <div class="add" ng-click="addingField.active = !addingField.active; new_field = ''">
+            <div ng-include src="'images/svg/plus_icon_2.svg'"></div>
+        </div>
+
+        <div ng-show="addingField.active" class="add_field_popover">
+
+                <div ng-show="!new_field_type" class="choose_type">
+
+                    <label for="new_field_type_image">image</label>
+                    <input class="field_type_input" id="new_field_type_image" type="radio" ng-model="new_field_type" value="image">
+
+                    <label for="new_field_type_text">text</label>
+                    <input class="field_type_input" id="new_field_type_text" type="radio" ng-model="new_field_type" value="text">
+
+                </div>
+
+                <div <div ng-show="new_field_type">
+
+                    <div ng-show="!addingField.adding">
+                        <input type="text" ng-model="new_field" class="new_field_input">
+                        <button ng-click="createField(new_field,new_field_type)" class="new_field_confirm">ADD</button>
+                    </div>
+                    <span class="adding_indicator" ng-show="addingField.adding">Adding...</span>
+                </div>
+
+        </div>
+
+
+        <div class="debugging_window">
+            <div class="header">Fields Data model</div>
+            <div class="inner_window">
+                <div>fields = [{</div>
+                <div class="code_line" ng-repeat="field in fields">
+                    <div>"label": "{{field.label}}",</div>
+                    <div>"type": "{{field.type}}"</div>
+                    <div>}, {</div>
+                </div>
+                <div>}]</div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

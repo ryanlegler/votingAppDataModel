@@ -1,0 +1,14 @@
+Directive
+value:{{value}}
+
+
+<div test-directive myname="12" ></div>
+
+
+<button ng-click="storeCurrentTime();">store the current time</button>
+
+<button ng-click="clearStoredTime();">clear stored time</button>
+
+
+<div>MIN:<span ng-bind="storedtime.minutesHoursSeconds"></span></div>
+<div>DATE: <span ng-bind="storedtime.date"></span></div>
