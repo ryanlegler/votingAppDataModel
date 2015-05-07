@@ -1,14 +1,12 @@
 <div ng-controller="candidateDataModelController">
 
     <div class="column_1">
-            <h1>Candidates</h1>
-        <div candidates-directive fields="fields" candidates="candidates"></div>
+        <h1>Candidates</h1>
+        <div candidates-directive fields="fields"></div>
 
-
-        <div class="debugging_window candidates">
+<!--         <div class="debugging_window candidates">
             <div class="header">Candidates Data</div>
             <div class="inner_window">
-
                 <div class="code_line" ng-repeat="candidate in candidates track by $index">
                     <div>"label": "{{candidate.label}}",</div>
                     <div>fields [{</div>
@@ -21,10 +19,8 @@
                     <div>}]</div>
                 </div>
                 <div>}]</div>
-
             </div>
-        </div>
-
+        </div> -->
 
         <div ng-click="clearCandidates()">CLEAR</div>
     </div>
@@ -65,7 +61,7 @@
         </div>
 
 
-        <div class="debugging_window">
+        <!-- <div class="debugging_window">
             <div class="header">Fields Data model</div>
             <div class="inner_window">
                 <div>fields = [{</div>
@@ -77,7 +73,7 @@
                 <div>}]</div>
 
             </div>
-        </div>
+        </div> -->
     </div>
 
 </div>

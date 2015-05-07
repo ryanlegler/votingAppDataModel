@@ -1,15 +1,14 @@
-votingApp.directive('candidatesDirective',[ "$timeout",
-  function ($timeout) {
+votingApp.directive('candidatesDirective',[ "$timeout", "votingModel",
+  function ($timeout, votingModel) {
     return {
         restrict: 'EA',
         scope: {
-            fields: '=',
-            candidates: '='
+            fields: '='
         },
         templateUrl: 'templates/candidates-directive.html',
         controller: 'candidateDataModelController',
         link: function(scope, $element, $attrs) {
-            // console.log("helllo");
+            scope.candidates = votingModel.candidates;
         }//link
     }//return
 }]); //directive

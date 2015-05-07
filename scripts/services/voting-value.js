@@ -1,7 +1,4 @@
 votingApp.value('votingModel', {
     fields: [],
-    candidates: null
+    candidates: []
 });
-
-
-console.log("votingModel");

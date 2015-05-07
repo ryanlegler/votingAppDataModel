@@ -1,12 +1,12 @@
-votingApp.factory('candidatesFactory', function() {
+votingApp.factory('candidatesFactory', function(votingModel) {
     return {
         retreiveCandidates: function(dataModelFields) {
 
-            var candidates = JSON.parse(localStorage.getItem('storedCandidates'));
+            var storedCandidates = JSON.parse(localStorage.getItem('storedCandidates'));
 
-            if (candidates === null){
+            if (storedCandidates === null || storedCandidates === undefined || storedCandidates.length < 1 ){
 
-                candidates = [
+                var candidates = [
                     {
                         "label":'name1','fields':[]
                     },
@@ -17,22 +17,32 @@ votingApp.factory('candidatesFactory', function() {
                         "label":'name3','fields':[]
                     }
                 ];
+
+                localStorage.setItem('storedCandidates', JSON.stringify(candidates));
+            } else {
+
+                storedCandidates = JSON.parse(localStorage.getItem('storedCandidates'));
+
+                votingModel.candidates.length = 0;
+
+                for (var x = 0; x < storedCandidates.length; x++) {
+                    votingModel.candidates.push(storedCandidates[x]);
+                }
+
             }
 
-            localStorage.setItem('storedCandidates', JSON.stringify(candidates));
-
-            return candidates;
         },
         clearCandidates: function(candidates){
             localStorage.setItem('storedCandidates', JSON.stringify(null));
         },
-        storeCandidates: function(candidates){
-            localStorage.setItem('storedCandidates', JSON.stringify(candidates));
+        storeCandidates: function(){
+            localStorage.setItem('storedCandidates', JSON.stringify(votingModel.candidates));
         },
 
         updateCandidatesFieldLabel: function(field_label_current, field_label_new){
 
-            var candidates = JSON.parse(localStorage.getItem('storedCandidates'));
+            var candidates = votingModel.candidates;
+
             for (var i = candidates.length - 1; i >= 0; i--) {
                 for (var f = candidates[i].fields.length - 1; f >= 0; f--) {
                     if (candidates[i].fields[f].label === field_label_current){
@@ -46,7 +56,8 @@ votingApp.factory('candidatesFactory', function() {
             return candidates;
         },
         deleteCandidatesField: function(field_label, field_index){
-            var candidates = JSON.parse(localStorage.getItem('storedCandidates'));
+            var candidates = votingModel.candidates;
+
             for (var i = candidates.length - 1; i >= 0; i--) {
                 if (field_index > -1) {
                     candidates[i].fields.splice(field_index, 1);
@@ -54,13 +65,10 @@ votingApp.factory('candidatesFactory', function() {
             }
 
             localStorage.setItem('storedCandidates', JSON.stringify(candidates));
-
-            return candidates;
         },
         updateCandidateValue: function(candidate_label, field_label, field_value, field_index) {
 
-            var candidates = JSON.parse(localStorage.getItem('storedCandidates'));
-
+            var candidates = votingModel.candidates;
 
             for (var i = candidates.length - 1; i >= 0; i--) {
                 if(candidates[i].label === candidate_label){
