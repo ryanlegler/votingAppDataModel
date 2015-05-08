@@ -8,10 +8,19 @@ votingApp.factory('candidateDataModelFactory', function(votingModel) {
         retrieveFields: function() {
             var fields = JSON.parse(localStorage.getItem('storedFields'));
 
-            votingModel.fields.length = 0;
+            if (fields === null || fields === undefined || fields.length < 1 ) {
 
-            for (var x = 0; x < fields.length; x++) {
-                votingModel.fields.push(fields[x]);
+                var fields = [];
+
+                localStorage.setItem('storedFields', JSON.stringify(fields));
+
+            } else {
+
+                votingModel.fields.length = 0;
+
+                for (var x = 0; x < fields.length; x++) {
+                    votingModel.fields.push(fields[x]);
+                }
             }
 
         },

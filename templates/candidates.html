@@ -1,28 +1,13 @@
-<div ng-controller="candidateDataModelController">
+
+
+<div class="voting_app_container" ng-controller="candidateDataModelController">
+
 
     <div class="column_1">
         <h1>Candidates</h1>
         <div candidates-directive fields="fields"></div>
 
-<!--         <div class="debugging_window candidates">
-            <div class="header">Candidates Data</div>
-            <div class="inner_window">
-                <div class="code_line" ng-repeat="candidate in candidates track by $index">
-                    <div>"label": "{{candidate.label}}",</div>
-                    <div>fields [{</div>
-                    <div style="margin-left:30px;" ng-repeat="candidatefield in candidate.fields">
-                        <div>"label": "{{candidatefield.label}}",</div>
-                        <div>"type": "{{candidatefield.type}}"</div>
-                        <div ng-if="candidatefield.value">"value": "{{candidatefield.value}}"</div>
-                        <div>}, {</div>
-                    </div>
-                    <div>}]</div>
-                </div>
-                <div>}]</div>
-            </div>
-        </div> -->
-
-        <div ng-click="clearCandidates()">CLEAR</div>
+        <!-- <div ng-click="clearCandidates()">CLEAR</div> -->
     </div>
 
 
@@ -60,21 +45,9 @@
 
         </div>
 
-
-        <!-- <div class="debugging_window">
-            <div class="header">Fields Data model</div>
-            <div class="inner_window">
-                <div>fields = [{</div>
-                <div class="code_line" ng-repeat="field in fields">
-                    <div>"label": "{{field.label}}",</div>
-                    <div>"type": "{{field.type}}"</div>
-                    <div>}, {</div>
-                </div>
-                <div>}]</div>
-
-            </div>
-        </div> -->
     </div>
+
+    <div ng-click="toggleDebug()" class="debug_toggle" ng-class="{open:debugOpen}">toggle</div>
 
 </div>
 

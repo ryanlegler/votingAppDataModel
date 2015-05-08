@@ -1,5 +1,5 @@
-votingApp.directive('ospreyDirective',[ "$timeout",
-  function ($timeout) {
+votingApp.directive('ospreyDirective',[ "$timeout","votingModel",
+  function ($timeout, votingModel) {
     return {
         restrict: 'EA',
         scope: {
@@ -12,14 +12,16 @@ votingApp.directive('ospreyDirective',[ "$timeout",
             var ospry = new Ospry('pk-test-r3919l2wgnqxbqruu5ylnclm');
 
             $element.find('#up-form').submit(function(e) {
-              e.preventDefault();
-              ospry.up({
-                form: this,
-                imageReady: function(err, metadata) {
-                    scope.ngModel = metadata.url;
-                    scope.$apply();
-                }
-              });
+
+                e.preventDefault();
+                ospry.up({
+                    form: this,
+                    imageReady: function(err, metadata) {
+                        scope.ngModel = metadata.url;
+                        scope.$apply();
+                    }
+                });
+
 
             });
 

@@ -2,6 +2,8 @@ votingApp.controller('candidateDataModelController',
 function($scope, $http, $timeout, candidateDataModelFactory, candidatesFactory, votingModel) {
     $scope.addingField = {}
     $scope.editingFieldName = false;
+    $scope.debugOpen = false;
+
 
     // // grab fields array from local storage and put it into the "Value Provider"
 
@@ -98,4 +100,7 @@ function($scope, $http, $timeout, candidateDataModelFactory, candidatesFactory, 
         }
     }
 
+    $scope.toggleDebug = function() {
+        $scope.debugOpen = !$scope.debugOpen;
+    }
 });

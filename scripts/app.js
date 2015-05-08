@@ -1,4 +1,4 @@
-var votingApp = angular.module('votingApp', ['ngRoute']);
+var votingApp = angular.module('votingApp', ['ngRoute', 'ngAnimate']);
 
 // configure our routes
 votingApp.config(function($routeProvider) {

@@ -25,3 +25,23 @@
 
 
 </span>
+
+
+
+<div class="debugging_window">
+
+    <div ng-show="debugOpen">
+        <div class="header">Fields Data model</div>
+        <div class="inner_window">
+            <div>fields = [{</div>
+            <div class="code_line" ng-repeat="field in fields">
+                <div>"label": "{{field.label}}",</div>
+                <div>"type": "{{field.type}}"</div>
+                <div ng-show="!$index">}, {</div>
+                <div ng-show="$index">}</div>
+            </div>
+            <div>}]</div>
+
+        </div>
+    </div>
+</div>

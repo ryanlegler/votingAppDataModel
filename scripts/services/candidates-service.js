@@ -8,13 +8,13 @@ votingApp.factory('candidatesFactory', function(votingModel) {
 
                 var candidates = [
                     {
-                        "label":'name1','fields':[]
+                        "label":'#cats','fields':[]
                     },
                     {
-                        "label":'name2','fields':[]
+                        "label":'#dogs','fields':[]
                     },
                     {
-                        "label":'name3','fields':[]
+                        "label":'#other','fields':[]
                     }
                 ];
 
