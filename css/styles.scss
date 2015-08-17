@@ -34,6 +34,11 @@ body {
 }
 
 $lightborder: #e3e3e3;
+$magenta: #cd35d3;
+
+* {
+    box-sizing: border-box;
+}
 h1{
     margin-top:0;
 }
@@ -66,11 +71,10 @@ svg {
 .column_2 {
     position: fixed;
     right:0;
-    top:0;
+    top:18px;
     padding: 20px;
     float: left;
     width: 40%;
-    box-sizing: border-box;
 }
 
 .token {
@@ -80,6 +84,9 @@ svg {
     margin: 3px;
     position: relative;
     -webkit-transition: all 300ms;
+    &:hover {
+        background: #E3E3E3;
+    }
 }
 
 .token_trigger {
@@ -88,8 +95,7 @@ svg {
     left: 0;
     right: 0;
     height: 100%;
-    /*    background:red;
-    opacity:.3;*/
+    cursor:pointer;
 }
 
 .token_actions {
@@ -100,6 +106,7 @@ svg {
 
 .token_open .token_trigger {
     right: 55px;
+
 }
 
 .token_open.token {
@@ -120,7 +127,7 @@ svg {
 }
 
 .svg_icon.has_value {
-    background: #cd35d3;
+    background: $magenta;
 }
 
 .svg_icon.no_value {
@@ -139,8 +146,14 @@ svg {
 .remove_icon {
     height: 20px;
     width: 20px;
-    background: #949494;
+    background: #767676;
     border-radius: 50%;
+    cursor:pointer;
+    -webkit-transition: all 300ms;
+    &:hover,
+    &:focus {
+        background: $magenta;
+    }
 }
 
 .remove_icon {
@@ -150,8 +163,10 @@ svg {
 .remove_icon svg {
     width: 40%;
     height: 40%;
-    margin-top: -54%;
+    top: -1px;
+    position: relative;
     display: inline-block;
+
 }
 
 .edit_icon svg {
@@ -169,7 +184,7 @@ svg {
 .add {
     margin: 15px 0;
     display: block;
-    background: #cd35d3;
+    background: $magenta;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -181,19 +196,43 @@ svg {
     fill: #fff;
 }
 
-.add_field_popover {
+.popover {
     position: relative;
     left: 62px;
     top: -64px;
     height: 50px;
-    background: rgb(176, 176, 176);
-    width: 230px;
+    background: #DCDCDC;
+    width: 231px;
     opacity: 1;
     -webkit-transition: all 300ms;
     -webkit-transform: translateX(0);
+    border-left: 2px solid $magenta;
+    &:after{
+        content: '';
+        position: absolute;
+        top: 17px;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 7px 8px 7px 0;
+        border-color: transparent $magenta transparent transparent;
+    }
+    &.asset_type_image {
+          width: 338px;
+          padding: 13px 20px;
+
+    }
+    &.asset_type_image_confirm {
+      height: 145px;
+    }
+    &.asset_type_text {
+      height: 145px;
+    }
+
 }
 
-.add_field_popover.ng-hide {
+.popover.ng-hide {
     opacity: 0;
     -webkit-transform: translateX(-20px);
 }
@@ -220,29 +259,32 @@ svg {
     margin: 0;
     padding: 0;
     text-transform: uppercase;
+    cursor:pointer;
 }
 
 .choose_type label:hover {
-    background: #cd35d3;
+    background: $magenta;
     color: #fff;
 }
 
-.new_field_input {
-    margin: 5px;
-    height: 37px;
+.popover_input {
+    margin: 7px;
+    height: 36px;
     border: none;
     width: 161px;
     padding: 10px;
-    box-sizing: border-box;
     font-size: 12px;
+
 }
 
 .new_field_confirm {
-    background: #cd35d3;
+    background: $magenta;
     border: none;
     height: 39px;
     padding: 0 12px;
     color: #fff;
+    position: relative;
+    left:-3px;
 }
 
 .adding_indicator {
@@ -262,8 +304,9 @@ svg {
     z-index: 1;
 }
 .collapse_trigger{
+    cursor:pointer;
     position: absolute;
-    top:15px;
+    top:3px;
     right:0;
     -webkit-transform: rotate(-90deg);
     &.open{
@@ -288,7 +331,7 @@ svg {
     .svg_icon {
         height: 30px;
         width: 20px;
-        cursor:pointer;
+
 
     }
 
@@ -311,6 +354,16 @@ svg {
                 height: 15px;
                 width: 13px;
             }
+        }
+    }
+    .candidate_field_container{
+        opacity:1;
+        -webkit-transition:all 300ms;
+        min-height:300px;
+        max-height:auto;
+        &.ng-hide{
+            opacity: 0;
+            min-height:0;
         }
     }
     .candidate_field {
@@ -338,7 +391,7 @@ svg {
         width: 100%;
         border: 1px solid $lightborder;
         padding: 10px;
-        box-sizing: border-box;
+
         font-size: 13px;
         font-family: helvetica;
     }
@@ -371,7 +424,6 @@ svg {
     bottom: 0;
     right: 0;
     width: 40%;
-    box-sizing: border-box;
 }
 
 .debugging_window.candidates {
@@ -395,4 +447,75 @@ svg {
 
 .code_line {
     margin-left: 20px;
+}
+
+.asset_popover{
+    .icon_chevron {
+        svg path {
+            fill: #fff;
+        }
+        -webkit-transform: rotate(-90deg);
+    }
+}
+
+
+.asset_image{
+    background-color:#f9f9f9;
+    background-repeat: no-repeat;
+    background-position:center center;
+    background-size:contain;
+    width:115px;
+    height:115px;
+    display:inline-block;
+
+}
+.asset_text_area {
+    border: 1px solid $lightborder;
+    width: 216px;
+    margin: 4px;
+    height: 83px;
+    padding:10px;
+}
+
+.asset_text_confirm{
+   position: absolute;
+   left: initial;
+   right: 6px;
+   bottom: 7px;
+}
+.asset_item{
+    float: left;
+    width: 20%;
+    padding:3px;
+    display: block;
+    position: relative;
+    .asset_label {
+        background-color:#E2E2E2;
+        padding:10px 15px;
+    }
+    .asset_image{
+        width:100%;
+        height:0;
+        padding-bottom:100%;
+        display:block;
+        background-color:#E2E2E2;
+    }
+    .asset_text_container {
+        width:100%;
+        height:0;
+        padding-bottom:100%;
+        background-color:#E2E2E2;
+        position: relative;
+        .asset_text{
+            position: absolute;
+            top:5px;
+            bottom:5px;
+            right:5px;
+            left:5px;
+            padding:10px;
+            display: inline-block;
+            background:#f9f9f9;
+
+        }
+    }
 }

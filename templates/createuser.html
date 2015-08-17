@@ -1,0 +1,160 @@
+<div ng-show="logged_in">
+
+    <div style="background-image:url({{profile.avatar}});"class="avatar"></div>
+    {{profile.email}} <button class="sign_out" ng-click="signOut();">Sign Out</button>
+
+    <button ng-click="delete_account = !delete_account">Delete Account</button>
+    <div ng-show="delete_account">
+        <h2>Confirm your email and password to delete your account</h2>
+        <div>
+            email
+            <input type="text" ng-model="user.email" >
+        </div>
+        <div>
+            password
+            <input type="password" ng-model="user.password" >
+        </div>
+        <button ng-click="deleteUser();">DELETE ACCOUNT</button>
+    </div>
+
+
+    <!-- {{profile | json}} -->
+
+    <hr>
+
+    <input type="date" ng-model="picker_date" ng-change="calculatePickerDate();">
+
+    <div class="nav_bar">
+        <button class="nav_button" ng-click="previousDay()">prev</button>
+        <div class="current_day">{{day_view}}</div>
+        <button class="nav_button" ng-click="nextDay()">next</button>
+    </div>
+
+    <h1 class="drink_count">{{profile.drinklog[day_view].drinks}}</h1>
+    <button class="log_drink" ng-click="logDrink()">LOG DRINK</button>
+
+
+
+
+    <hr>
+    <div class="day" ng-repeat="day in currentWeek track by $index" ng-class="{'state_current': day.is_current_day}">
+
+
+        <div>{{day.date}}</div>
+        <div style="font-size:30px">{{day.day}}</div>
+        <div>{{day.drinks}} / {{daily_goal}}</div>
+    </div>
+</div>
+
+
+
+<div ng-show="!logged_in">
+
+    <h2>login in</h2>
+    <div>
+        email
+        <input type="text" ng-model="user.email" >
+
+        <span ng-show="create_error.email">{{create_error.email_message}}</span>
+    </div>
+    <div>
+        password
+        <input type="password" ng-model="user.password" >
+    </div>
+
+    <button ng-model="user" ng-click="signIn()" >Sign In</button>
+
+
+    <br>
+    <hr>
+
+    <h2>Create an account</h2>
+    <div>
+        email
+        <input type="text" ng-model="user.email" >
+        <span ng-show="create_error.email">{{create_error.email_message}}</span>
+    </div>
+    <div>
+        password
+        <input type="password" ng-model="user.password" >
+    </div>
+    <div>
+        repeat password
+        <input type="password" ng-model="user.password_repeat" >
+    </div>
+
+    <button ng-model="user" ng-click="userSignup()" >Create</button>
+
+
+</div>
+
+
+<style>
+hr{
+    margin: 20px 0;
+    border:1px solid #eaeaea;
+}
+.day{
+    width:14.28%;
+    display: inline-block;
+    text-align: center;
+}
+.avatar{
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height:50px;
+    width:50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.sign_out{
+    display: inline-block;
+}
+input{
+    width:100%;
+}
+.drink_count{
+    border-radius: 50%;
+    border: 5px solid #000;
+    width: 250px;
+    text-align: center;
+    font-size: 187px;
+    line-height: 230px;
+    height: 240px;
+    margin: 22px auto;
+}
+.log_drink {
+    font-family: TradeGothicBoldCondensedNo20;
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    border: 2px solid #000;
+    text-transform: uppercase;
+    font-size:30px;
+    -webkit-transition: all 300ms;
+}
+.log_drink:hover{
+    background:#000;
+    color:#fff;
+}
+.nav_bar {
+    text-align:center;
+}
+.current_day {
+    display: inline-block;
+}
+.nav_button{
+    margin: 0px 43px;
+    display: inline-block;
+}
+
+.state_current{
+    background: #FBBA00;
+        color: #fff;
+
+}
+h2{
+    text-align: center;
+}
+</style>
